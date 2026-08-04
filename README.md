@@ -56,8 +56,10 @@ Output against the bundled sixteen-module sample graph — real messages, column
 ```text
 [error]   denied-edge        PaymentsFeature → AnalyticsCore is denied. Payments may not
                              emit analytics directly — route through PaymentsDomain.
-[error]   dependency-cycle   AccountDomain → NetworkingCore → SessionDomain → AccountDomain
-[error]   dependency-cycle   NetworkingCore → SessionDomain → NetworkingCore
+[error]   dependency-cycle   Dependency cycle: AccountDomain → NetworkingCore →
+                             SessionDomain → AccountDomain
+[error]   dependency-cycle   Dependency cycle: NetworkingCore → SessionDomain →
+                             NetworkingCore
 [error]   layer-inversion    NetworkingCore (Foundation) imports SessionDomain (Domain) —
                              that points up the stack.
 [warning] sibling-import     CheckoutFeature imports its Feature sibling CatalogFeature;
