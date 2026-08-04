@@ -11,7 +11,7 @@
 - **Cycle detection** — iterative DFS, no recursion, deterministic output.
 - **Blast radius** — if I touch this module, how many modules have to rebuild? This is the number that predicts your CI bill, and it is a property of your graph, not of your build tool.
 
-Article: (added after publish)
+Article: [Swift Package Manager Is Not a Default. It's a Ceiling — and the Ceiling Is Documented](https://medium.com/@er.rajatlakhina/swift-package-manager-is-not-a-default-its-a-ceiling-and-the-ceiling-is-documented-cea931ed5f34)
 
 ---
 
