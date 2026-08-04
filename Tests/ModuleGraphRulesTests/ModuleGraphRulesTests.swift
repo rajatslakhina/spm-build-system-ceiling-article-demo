@@ -90,7 +90,7 @@ final class ModuleGraphRulesTests: XCTestCase {
         XCTAssertEqual(cycles[0].message, "Dependency cycle: A → B → A")
     }
 
-    func testThreeNodeCycleIsFoundFromEveryEntryPoint() {
+    func testThreeNodeCycleIsReportedOnceInCanonicalOrder() {
         let graph = ModuleGraph(modules: [
             Module(id: "C", layer: "Domain", dependencies: ["A"]),
             Module(id: "A", layer: "Domain", dependencies: ["B"]),
@@ -181,9 +181,9 @@ final class ModuleGraphRulesTests: XCTestCase {
     }
 
     /// The detector reports one cycle per back edge, not every simple cycle.
-    /// What it must never do is leave a module that sits in a cycle out of the
-    /// report entirely — that is the property a build gate depends on.
-    func testEveryCyclicModuleAppearsInSomeReportedCycle() {
+    /// What it must never do is let a cyclic graph come back clean. For the
+    /// bundled sample, every module that sits in a cycle is named in one.
+    func testEveryCyclicModuleInTheSampleAppearsInSomeReportedCycle() {
         let reported = GraphAudit.asShipped.violations.reduce(into: Set<ModuleID>()) { set, violation in
             if case .cycle(let path) = violation.kind { set.formUnion(path) }
         }
