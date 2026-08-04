@@ -111,9 +111,11 @@ public enum GraphValidator {
     /// The guarantee this gives you is *one reported cycle per back edge found
     /// in DFS order*, not the complete set of simple cycles — enumerating those
     /// is Johnson's algorithm and the count is exponential in the worst case.
-    /// Every module that participates in any cycle still shows up in at least
-    /// one report, which is all a build gate needs: you fix a cycle, you re-run,
-    /// you get the next one. Self-imports are skipped here because
+    /// That is deliberately weaker than "every cycle in one pass", and the
+    /// trade it buys is the one a build gate actually wants: at least one back
+    /// edge in every strongly connected component is always reported, so a
+    /// cyclic graph can never come back clean. You fix a cycle, you re-run, you
+    /// get the next one. Self-imports are skipped here because
     /// `selfDependency` already covers them, and reporting `A → A` twice trains
     /// people to skim the output.
     static func cycles(in graph: ModuleGraph) -> [Violation] {

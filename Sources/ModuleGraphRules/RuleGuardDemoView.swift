@@ -1,6 +1,26 @@
 #if canImport(SwiftUI)
 import SwiftUI
 
+/// Semantic surfaces rather than literal white, so the demo is readable in dark
+/// mode — and resolved per-platform, because the library also builds for macOS.
+extension Color {
+    static var demoBackground: Color {
+        #if canImport(UIKit)
+        Color(uiColor: .systemGroupedBackground)
+        #else
+        Color(nsColor: .windowBackgroundColor)
+        #endif
+    }
+
+    static var demoCard: Color {
+        #if canImport(UIKit)
+        Color(uiColor: .secondarySystemGroupedBackground)
+        #else
+        Color(nsColor: .controlBackgroundColor)
+        #endif
+    }
+}
+
 /// The demo app's root view. It audits the bundled sixteen-module sample graph
 /// against `RuleSet.standard` and shows the two things a `Package.swift` cannot
 /// tell you: which imports break the agreed policy, and how much of the graph
@@ -32,7 +52,7 @@ public struct RuleGuardDemoView: View {
                 }
                 .padding(20)
             }
-            .background(Color(white: 0.96))
+            .background(Color.demoBackground)
             .navigationTitle("Module Graph Rules")
         }
     }
@@ -65,7 +85,7 @@ public struct RuleGuardDemoView: View {
             Spacer(minLength: 0)
         }
         .padding(16)
-        .background(RoundedRectangle(cornerRadius: 14).fill(Color.white))
+        .background(RoundedRectangle(cornerRadius: 14).fill(Color.demoCard))
     }
 
     private var scoreboard: some View {
@@ -84,7 +104,7 @@ public struct RuleGuardDemoView: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 12)
-        .background(RoundedRectangle(cornerRadius: 12).fill(Color.white))
+        .background(RoundedRectangle(cornerRadius: 12).fill(Color.demoCard))
     }
 
     @ViewBuilder
@@ -162,7 +182,7 @@ public struct RuleGuardDemoView: View {
             VStack(alignment: .leading, spacing: 0) { content() }
                 .padding(16)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(RoundedRectangle(cornerRadius: 14).fill(Color.white))
+                .background(RoundedRectangle(cornerRadius: 14).fill(Color.demoCard))
         }
     }
 }
