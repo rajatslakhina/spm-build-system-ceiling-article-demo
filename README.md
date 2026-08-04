@@ -51,7 +51,7 @@ for violation in audit.violations {
 }
 ```
 
-Output against the bundled sixteen-module sample graph, verbatim:
+Output against the bundled sixteen-module sample graph — real messages, column-aligned here for width:
 
 ```text
 [error]   denied-edge        PaymentsFeature → AnalyticsCore is denied. Payments may not
@@ -64,9 +64,9 @@ Output against the bundled sixteen-module sample graph, verbatim:
                              that band forbids sideways imports.
 ```
 
-## What moving four edges buys you
+## What fixing four edges buys you
 
-`SampleGraphs.remediated` is the same sixteen modules with four edges rerouted — nothing added, nothing deleted.
+`SampleGraphs.remediated` is the same sixteen modules with three of those edges deleted and the fourth repointed one layer down — no module added, none removed.
 
 | | As shipped | After |
 |---|---|---|
